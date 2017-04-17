@@ -11,6 +11,18 @@ function cell(x,y,size,i,j){
   this.note = 10;
   var neighbours = 0;
 
+  this.expand = function() {
+    if(this.size < 15){
+      this.size+=2;
+    }
+  }
+
+  this.contract = function() {
+    if(this.size > 5){
+      this.size--;
+    }
+  }
+
   this.calc = function(){
     neighbours = 0;
     for(i=this.col-1; i<this.col+2 ;i++){
@@ -25,12 +37,15 @@ function cell(x,y,size,i,j){
 
   this.show = function(){
     if (this.state==1 && this.prev==0){
+      this.expand();
       this.color = color(200,0,0,200);
     } else if (this.state==1 && this.prev==1){
+        this.contract();
         this.color = color(150,0,0,200);
     } else if (this.state==0 && this.prev==0) {
         this.color = color(15,15,15,200);
     } else {
+        this.contract();
         this.color = color(0,0,100,150);
     }
     fill(this.color);

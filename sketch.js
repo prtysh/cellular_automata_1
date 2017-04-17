@@ -4,21 +4,26 @@ var cols;
 
 function setup() {
   createCanvas(720,480);
-  background(51);
+  rectMode(CENTER);
+  background(30);
   frameRate(18);
   noStroke();
-  rows = height/10;
-  cols = width/10;
+  var side = 5;
+  var factor = 10;
+  rows = height/factor;
+  cols = width/factor;
+
 
   for(i=0;i<cols;i++){
     cells[i] = [];
     for(j=0;j<rows;j++){
-        cells[i][j] = new cell(i*10,j*10,10,i,j);
+        cells[i][j] = new cell(i*factor,j*factor,side,i,j);
     }
   }
 }
 
 function draw() {
+  background(0);
   for(i=1;i<cols-1;i++){
     for(j=1;j<rows-1;j++){
       cells[i][j].show();
