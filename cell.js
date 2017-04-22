@@ -8,7 +8,11 @@ function cell(x,y,size,i,j){
   this.state = round(random(0,1));
   this.prev = 0;
   this.color = color(0,0,0);
-  this.note = 10;
+  this.pitch = 200;
+  if(this.state==1){
+    aliveCount++;
+  }
+
   var neighbours = 0;
 
   this.expand = function() {
@@ -20,6 +24,8 @@ function cell(x,y,size,i,j){
   this.contract = function() {
     if(this.size > 5){
       this.size--;
+      //this.amp-+0.1;
+      //osc.amp(this.amp);
     }
   }
 
@@ -38,15 +44,16 @@ function cell(x,y,size,i,j){
   this.show = function(){
     if (this.state==1 && this.prev==0){
       this.expand();
-      this.color = color(200,0,0,200);
+      this.color = color('#FFCC11');
+      //this.color = color(0,200,200,200);
     } else if (this.state==1 && this.prev==1){
         this.contract();
-        this.color = color(150,0,0,200);
+        this.color = color(0,150,0,150);
     } else if (this.state==0 && this.prev==0) {
-        this.color = color(15,15,15,200);
+        this.color = color(15,15,15,150);
     } else {
         this.contract();
-        this.color = color(0,0,100,150);
+        this.color = color('#8B3A3A');
     }
     fill(this.color);
     rect(this.x,this.y,this.size,this.size);
